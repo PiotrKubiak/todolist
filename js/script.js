@@ -51,7 +51,7 @@
             ${task.done ? "✔" : ""}
           </button>           
             <span class="tasks__content${task.done ? "tasks__content--done" : ""}" 
-            <button class="tasks__button tasks__button--remove js-remove">🗑</button>                                                     
+            <button class="tasks__button tasks__button--remove js-remove"> 🗑 </button>                                                     
         </li>
       `;                                                                                //dodawanie przekreślenia do zrobionych zadań
     }
