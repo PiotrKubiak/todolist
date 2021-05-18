@@ -1,11 +1,18 @@
 html {
     box-sizing: border-box;
-  }
-  
-  *, ::after, ::before {
+}
+
+*, ::after, ::before {
     box-sizing: inherit;
-  }
-  
-  body {
+}
+
+body {
+    background-color: rgb(238, 238, 238);
     font-family: 'Montserrat', sans-serif;
-  }
+}
+
+.container {
+    max-width: 1000px;
+    padding: 20px;
+    margin: 0 auto;
+}
