@@ -1,21 +1,33 @@
 {
-    const render = () => {
-        let htmlString = "";
+  const tasks = [                                                                 //tablica obiektów
+    {
+      content: "wstać rano",
+      done: true,
+    },
+    {
+      content: "zjeść śniadanie",
+      done: false,
+    },
+  ];
 
-        for (const task of tasks) {
-            htmlString += `
-                <li>
-                    ${task.content}
-                </li>
-                `;
-        }
 
-        document.querySelector(".js-tasks").innerHTML = htmlString;
-    };
+  const render = () => {                                                        //renderowanie listy
+    let htmlString = "";
 
-    const init = () => {
-        render();
-    };
+    for (const task of tasks) {                                                 //co robimy dla każdego zadania //konkatanacja  można przy każdym zadaniu coś dopisywać
+      htmlString += `                                                           
+        <li${task.done ? " style=\"text-decoration: line-trought\"" : ""}>
+           ${task.content}
+        </li>
+      `;
+    }
 
-    init();
+    document.querySelector(".js-tasks").innerHTML = htmlString;
+  };
+
+  const init = () => {
+    render();
+  };
+
+  init();
 }
