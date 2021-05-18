@@ -9,7 +9,7 @@
       done: true,
     },
   ];
-  
+
   const addNewTask = (newTaskContent) => {
     tasks.push({                                                                       //co robimy jeśli się coś wpisze
       content: newTaskContent,
@@ -26,6 +26,24 @@
   const toggleTaskDone = (taskIndex) => {                                               //fukkcja zmienia done w danym tasku, w tasku mamy taskIndex i teraz done i zaprzeczamy 
     tasks[taskIndex].done = !tasks[taskIndex].done;                                      //teraz do done wpisujemy przeciwieństwo done
     render();
+  }
+
+  const bindsEvent = () => {
+    const removeButtons = document.querySelectorAll(".js-remove");
+
+    removeButtons.forEach((removeButton, index) => {                                    //usuwamy zadania buttonem usuń index potrzebny żeby przekazać do remove task
+      removeButton.addEventListener("click", () => {
+        removeTask(index);
+      })
+    });
+
+    const toggleDoneButtons = document.querySelectorAll(".js-done");
+
+    toggleDoneButtons.forEach((toggleDoneButton, index) => {                                    //skreślamy zadania buttonem skreśl index
+      toggleDoneButton.addEventListener("click", () => {
+        toggleTaskDone(index);
+      })
+    });
   }
 
   const render = () => {                                                                //funkcja render na podstawie której wyrenderują się dane
@@ -45,21 +63,7 @@
 
     document.querySelector(".js-tasks").innerHTML = htmlString;
 
-    const removeButtons = document.querySelectorAll(".js-remove");
-
-    removeButtons.forEach((removeButton, index) => {                                    //usuwamy zadania buttonem usuń index potrzebny żeby przekazać do remove task
-      removeButton.addEventListener("click", () => {
-        removeTask(index);
-      })
-    });
-
-    const toggleDoneButtons = document.querySelectorAll(".js-done");
-
-    toggleDoneButtons.forEach((toggleDoneButton, index) => {                                    //skreślamy zadania buttonem skreśl index
-      toggleDoneButton.addEventListener("click", () => {
-        toggleTaskDone(index);
-      })
-    });
+    bindsEvent();
   };
 
   const onFormSubmit = (event) => {                                                   //blokada wysłania formularza, biore treść tego inputa 
