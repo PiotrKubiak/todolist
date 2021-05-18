@@ -30,7 +30,7 @@
       })
     });
 
-    const toggleDoneButtons = document.querySelectorAll(".js-done");
+    const toggleDoneButtons = document.querySelectorAll(".js-toggleDone");
 
     toggleDoneButtons.forEach((toggleDoneButton, index) => {                            //skreślamy zadania buttonem skreśl index
       toggleDoneButton.addEventListener("click", () => {
@@ -44,10 +44,14 @@
                                                                                         //po każdej akcji od nowa robi całą zawartość listy, templet stings łączy się html z różnymi wyrażeniami
     for (const task of tasks) {
       htmlString += `                                                           
-        <li class= "tasks__item${task.done ? " task__item tasks__item--done" : ""}">
-            <button class="tasks__button tasks__button--done js-done"> ok </button>
-            <button class="tasks__button tasks__button--remove js-remove"> U </button>              
-           ${task.content}                                                              
+        <li 
+          class= "tasks__item js-task"
+        >
+          <button class="tasks__button tasks__button--toggleDone js-toggleDone"> 
+            ${task.done ? "✔" : ""}
+          </button>           
+            <span class="tasks__content${task.done ? "tasks__content--done" : ""}" 
+            <button class="tasks__button tasks__button--remove js-remove">🗑</button>                                                     
         </li>
       `;                                                                                //dodawanie przekreślenia do zrobionych zadań
     }

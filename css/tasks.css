@@ -14,7 +14,7 @@
     border-bottom: 1px solid #ddd;
 }
 
-.tasks__item--done {
+.tasks__content--toggleDone {
     text-decoration: line-through;
 }
 
@@ -26,14 +26,14 @@
     padding: 0;
 }
 
-.tasks__button--done {
+.tasks__button--toggleDone {
     background: green;
 }
 
-.tasks__button--done:active {
+.tasks__button--toggleDone:active {
     background: rgb(0, 206, 0);
 }
 
-.tasks__button--done:hover {
+.tasks__button--toggleDone:hover {
     background: rgb(1, 156, 1);
 }
