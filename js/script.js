@@ -2,7 +2,7 @@
   const tasks = [                                                                       //Tablice obiektów. możemy dodawać różne obiekty aby sprawdzić jak to będzie wyglądało (przykładowe)
   ];                                                                                    //Jeśli usuniemy będziemy mogli dodawać sobie jakąś własną liste
 
-  const removeTask = (taskIndex) => {                                                   //usuwa dane zadanie dostaje index zadania (taskIndex) i za pomocą metody splice usuwa je. 
+  const deleteTask = (taskIndex) => {                                                   //usuwa dane zadanie dostaje index zadania (taskIndex) i za pomocą metody splice usuwa je. 
     tasks.splice(taskIndex, 1);
     render();
   }
@@ -19,12 +19,12 @@
     render();                                                                           //żeby się coś wypisało trzeba znowu wywołać funkcję render
   };
 
-  const bindsRemoveEvents = () => {
-    const removeButtons = document.querySelectorAll(".js-remove");
+  const bindsdeleteEvents = () => {
+    const deleteButtons = document.querySelectorAll(".js-delete");
 
-    removeButtons.forEach((removeButton, taskIndex) => {                                    //usuwamy zadania buttonem usuń index potrzebny żeby przekazać do remove task
-      removeButton.addEventListener("click", () => {
-        removeTask(taskIndex);
+    deleteButtons.forEach((deleteButton, taskIndex) => {                                    //usuwamy zadania buttonem usuń index potrzebny żeby przekazać do delete task
+      deleteButton.addEventListener("click", () => {
+        deleteTask(taskIndex);
       })
     });
   };
@@ -36,11 +36,11 @@
       toggleDoneButton.addEventListener("click", () => {
         toggleTaskDone(taskIndex);
       });
-    });                                                                                     // tu skończyłem na 12:21
+    });                                                                                     
   };
 
   const render = () => {                                                                //funkcja render na podstawie której wyrenderują się dane
-    let htmlString = "";                                                                //później zajmuje się tym żeby przypisać to usuwanie do przycisków removeButtons
+    let htmlString = "";                                                                //później zajmuje się tym żeby przypisać to usuwanie do przycisków deleteButtons
                                                                                         //po każdej akcji od nowa robi całą zawartość listy, templet stings łączy się html z różnymi wyrażeniami
     for (const task of tasks) {
       htmlString += `                                                           
@@ -50,26 +50,26 @@
           <button class="tasks__button tasks__button--toggleDone js-toggleDone"> 
             ${task.done ? "✔" : ""}
           </button>           
-            <span class="tasks__content${task.done ? " tasks__content--done" : ""}">${task.content}</span>
-            <button class="tasks__button tasks__button--remove js-remove"> 🗑 </button>                                                     
+            <span class="tasks__content${ task.done ? " tasks__content--done" : ""}">${task.content}</span>
+            <button class="tasks__button tasks__button--delete js-delete"> 🗑 </button>                                                     
         </li>
       `;                                                                                //dodawanie przekreślenia do zrobionych zadań
     }
 
     document.querySelector(".js-tasks").innerHTML = htmlString;
 
-    bindsRemoveEvents();
-
+    bindsdeleteEvents();
+    bindToggleDoneEvents();
     
   };
 
-  const onFormSubmit = (event) => {                                                   //blokada wysłania formularza, biore treść tego inputa 
+  const onFormSubmit = (event) => {                                                   //blokada wysłania formularza, biore treść tego inputa i go resetuje
     event.preventDefault();
 
     const newTaskElement = document.querySelector(".js-newTask");
     const newTaskContent = newTaskElement.value.trim();                              //jeśli tekst pusty nic nie rób a jaśli coś wpisane dodaje nowe zadanie
 
-    if (newTaskContent === "") {
+    if (newTaskContent !== "") {
       addNewTask(newTaskContent);                                                     //jeśli nie jest pusty dodaje nowe zadanie i resetuje
       newTaskElement.value = "";
     }

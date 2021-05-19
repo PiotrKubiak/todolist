@@ -1,4 +1,3 @@
-
 .tasks {
     list-style: none;
     margin: 0;
@@ -30,10 +29,22 @@
     background: green;
 }
 
-.tasks__button--toggleDone:active {
-    background: rgb(0, 206, 0);
+.tasks__button--toggleDone:hover {
+    background: hsl(120, 99%, 31%);
 }
 
-.tasks__button--toggleDone:hover {
-    background: rgb(1, 156, 1);
+.tasks__button--toggleDone:active {
+    background: hsl(120, 100%, 40%);
+}
+
+.tasks__button--delete {
+    background: hsl(0, 100%, 50%);
+}
+
+.tasks__button--delete:hover {
+    background: hsl(0, 100%, 64%);
+}
+
+.tasks__button--delete:active {
+    background: hsl(0, 98%, 78%);
 }
