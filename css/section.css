@@ -7,8 +7,26 @@
 }
 
 .section__header {
-    font-size: 20px;
-    padding: 20px;
-    margin: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 15px;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #ddd;
+    padding: 20px;
+}
+
+@media(max-width: 767px) {
+    .section__header {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section__title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.section__body {
+    padding: 20px;
 }
