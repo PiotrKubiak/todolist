@@ -13,6 +13,10 @@
     border-bottom: 1px solid #ddd;
 }
 
+.tasks__item--hidden {
+    display: none;
+}
+
 .tasks__content {
     word-break: break-all;
 }
@@ -27,6 +31,7 @@
     width: 30px;
     height: 30px;
     padding: 0;
+    transition: background 0.5s;
 }
 
 .tasks__button--toggleDone {
