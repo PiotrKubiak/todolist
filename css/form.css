@@ -21,10 +21,12 @@
     background: teal;
     color: white;
     border: none;
+    transition: 0.5s;
 }
 
 .form__button:hover {
     background: hsl(180, 100%, 36%);
+    transform: scale(1.2);
 }
 
 
