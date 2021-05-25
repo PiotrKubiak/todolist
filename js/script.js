@@ -39,15 +39,15 @@
   const toggleHideDoneTasks = () => {
     hideDoneTasks = !hideDoneTasks;
     render();
-  }
+  };
 
-  const bindsDeleteEvents = () => {
+  const bindDeleteEvents = () => {
     const deleteButtons = document.querySelectorAll(".js-delete");
 
     deleteButtons.forEach((deleteButton, taskIndex) => {
       deleteButton.addEventListener("click", () => {
         deleteTask(taskIndex);
-      })
+      });
     });
   };
 
@@ -63,7 +63,7 @@
 
   const renderTasks = () => {
     const taskToHTML = task => `                                                           
-      <li class= "
+      <li class="
         tasks__item${task.done && hideDoneTasks ? "tasks__item--hidden" : ""} js-task
       ">
         <button class="tasks__button tasks__button--toggleDone js-toggleDone"> 
@@ -119,12 +119,12 @@
 
   const render = () => {
     renderTasks();
-    bindsDeleteEvents();
+    bindDeleteEvents();
     bindToggleDoneEvents();
 
     renderButtons();
     bindButtonsEvents();
-  }
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -138,7 +138,7 @@
     }
 
     newTaskElement.focus();
-  }
+  };
 
   const init = () => {
     render();
