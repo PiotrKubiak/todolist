@@ -1,4 +1,8 @@
 {
+  const welcome = () => {
+    console.log("Hello developers!!! :) ")
+  }
+
   let tasks = [];
   let hideDoneTasks = false;
 
@@ -118,6 +122,7 @@
   };
 
   const render = () => {
+    
     renderTasks();
     bindDeleteEvents();
     bindToggleDoneEvents();
@@ -146,6 +151,8 @@
     const form = document.querySelector(".js-form");
     form.addEventListener("submit", onFormSubmit);
   };
+
+  welcome();
 
   init();
 }
