@@ -6,6 +6,8 @@
   let tasks = [];
   let hideDoneTasks = false;
 
+  //let tasks jest zmienną, ponieważ za każdym razem nie będziemy modyfikować tylko przypisywać nową tablicę
+
   const deleteTask = (taskIndex) => {
     tasks = [
       ...tasks.slice(0, taskIndex),
@@ -13,6 +15,8 @@
     ];
     render();
   };
+
+  // funkcja usuwająca zadania, która wcześniej bazowała na splice, teraz tworzymy nową tablicę tasks, w której mamy wszystkie taski które są przed elementem który chcemy usunąć i wszystkie które są po elemencie do usunięcia. Będzie tworzona nowa tablica, która się składa z 2 tablic za pomocą slice
 
   const toggleTaskDone = (taskIndex) => {
     tasks = [
@@ -26,10 +30,14 @@
     render();
   };
 
+  // funkcja przełączająca gotowe zadania, stworzyliśmy nową tablicę, która składa się ze wszystkich elementów które były przed (...tasks.slice(0, taskIndex),), które były po (...tasks.slice(taskIndex + 1), i z nowego elementu (...tasks[taskIndex], done: !tasks[taskIndex].done,), który jest taki sam jak ten element i różni się tylko done.
+
   const addNewTask = (newTaskContent) => {
     tasks = [...tasks, { content: newTaskContent }];
     render();
   };
+
+  //funkcja która dodaje nowy element, bierze sobie tasks kopiuje i tworzy nową tablicę i dodaje nowy element
 
   const markAllTasksDone = () => {
     tasks = tasks.map((task) => ({
@@ -40,10 +48,14 @@
     render();
   };
 
+  //funkcja która oznacza wszystkie zadania jako wykonane, przelatujemy sobie po zadaniach funkcją map i zwracamy nowy task który ma done:true i który jest skopiowany,  
+
   const toggleHideDoneTasks = () => {
     hideDoneTasks = !hideDoneTasks;
     render();
   };
+
+  //funkcja, która chowa wszystkie wykonane zadania.
 
   const bindDeleteEvents = () => {
     const deleteButtons = document.querySelectorAll(".js-delete");
@@ -55,6 +67,8 @@
     });
   };
 
+  //funkcja która usuwa zadania
+
   const bindToggleDoneEvents = () => {
     const toggleDoneButtons = document.querySelectorAll(".js-toggleDone");
 
@@ -65,6 +79,8 @@
     });
   };
 
+  //funkcja, która przekreśla gotowe zadania
+
   const renderTasks = () => {
     const taskToHTML = task => `                                                           
       <li class="
@@ -72,8 +88,8 @@
       ">
         <button class="tasks__button tasks__button--toggleDone js-toggleDone"> 
           ${task.done ? "✔" : ""}
-        </button>           
-        <span class="tasks__content${task.done ? " tasks__content--done" : ""}">
+        </button>
+        <span class="tasks__content${ task.done ? " tasks__content--done" : ""}">
           ${task.content}
         </span>
         <button class="tasks__button tasks__button--delete js-delete"> 
@@ -85,6 +101,9 @@
     const tasksElement = document.querySelector(".js-tasks");
     tasksElement.innerHTML = tasks.map(taskToHTML).join("");
   };
+
+  //funkcja która dostaje w parametrze task i zwraca HTML'a, który reprezentuje ten task. Jest tutaj użyty map. Mamy tasksElement (js-tasks), bierzemy sobie tablicę tasks, mapujemy na tablicę HTML'i (używająć funkcji taskToHtml) i łączymy pustym łańcuchem znaków, dlatego wszystkie elementy łączymy w jeden string i wrzucamy do inner HTML.
+  // Jeśli zadanie jest ukończone to dodajemy tasks__item--hidden (w css ukrywa on element)
 
   const renderButtons = () => {
     const buttonsElement = document.querySelector(".js-buttons");
@@ -107,6 +126,10 @@
     `;
   };
 
+  //funkcja która dodaje buttony po ukazaniu się zadania i która je renderuje. Buttony mają albo ukrywać ukończone zadania albo pokazywać, albo oznaczać jako zrobione i nie oznaczać. 
+  //Jeśli nie ma żadnych zadań to nic nie będzie wpisane do buttonsElement. Natomiaast jeśli są to jest string.
+  //Funkcją every sprawdzamy czy wszystkie zadania są zrobione i jeśli tak dodajemy atrybut disabled a jeśli nie to go nie dodawać. 
+
   const bindButtonsEvents = () => {
     const markAllDoneButton = document.querySelector(".js-markAllDone");
 
@@ -121,8 +144,9 @@
     }
   };
 
+  //funkcja, która przypina te eventListener'y, które mają się odpalić po kliknięciu w jeden i drugi przycisk, natomiast te przyciski mogą się pojawić  ale nie muszą ponieważ one się renderują jeśli lista zadań nie jest pusta, dla tego mamy tutaj if, próbujemy sobie złapań tutaj przycisk markAllDoneButton jeśli on istnieje wtedy dodaje addEventListener, analogicznie z przyciskiem toggleHideDoneTasksButton.
+
   const render = () => {
-    
     renderTasks();
     bindDeleteEvents();
     bindToggleDoneEvents();
