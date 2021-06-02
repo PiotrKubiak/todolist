@@ -155,6 +155,8 @@
     bindButtonsEvents();
   };
 
+  //funkcja wywołująca
+
   const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -168,6 +170,8 @@
 
     newTaskElement.focus();
   };
+
+  //funkcja dodawająca kolejne zadanie
 
   const init = () => {
     render();
