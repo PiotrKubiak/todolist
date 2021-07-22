@@ -1,18 +1,21 @@
 {
   const welcome = () => {
-    console.log("Hello developers!!! :) ")
-  }
+    console.log("Hello developers!!! :) ");
+  };
 
   let tasks = [];
   let hideDoneTasks = false;
 
   //let tasks jest zmienną, ponieważ za każdym razem nie będziemy modyfikować tylko przypisywać nową tablicę
 
+  const addNewTask = (newTaskContent) => {
+    tasks = [...tasks, { content: newTaskContent }];
+    render();
+  };
+
+  //funkcja która dodaje nowy element, bierze sobie tasks kopiuje i tworzy nową tablicę i dodaje nowy element
   const deleteTask = (taskIndex) => {
-    tasks = [
-      ...tasks.slice(0, taskIndex),
-      ...tasks.slice(taskIndex + 1),
-    ];
+    tasks = [...tasks.slice(0, taskIndex), ...tasks.slice(taskIndex + 1)];
     render();
   };
 
@@ -32,13 +35,6 @@
 
   // funkcja przełączająca gotowe zadania, stworzyliśmy nową tablicę, która składa się ze wszystkich elementów które były przed (...tasks.slice(0, taskIndex),), które były po (...tasks.slice(taskIndex + 1), i z nowego elementu (...tasks[taskIndex], done: !tasks[taskIndex].done,), który jest taki sam jak ten element i różni się tylko done.
 
-  const addNewTask = (newTaskContent) => {
-    tasks = [...tasks, { content: newTaskContent }];
-    render();
-  };
-
-  //funkcja która dodaje nowy element, bierze sobie tasks kopiuje i tworzy nową tablicę i dodaje nowy element
-
   const markAllTasksDone = () => {
     tasks = tasks.map((task) => ({
       ...task,
@@ -48,7 +44,7 @@
     render();
   };
 
-  //funkcja która oznacza wszystkie zadania jako wykonane, przelatujemy sobie po zadaniach funkcją map i zwracamy nowy task który ma done:true i który jest skopiowany,  
+  //funkcja która oznacza wszystkie zadania jako wykonane, przelatujemy sobie po zadaniach funkcją map i zwracamy nowy task który ma done:true i który jest skopiowany,
 
   const toggleHideDoneTasks = () => {
     hideDoneTasks = !hideDoneTasks;
@@ -82,14 +78,18 @@
   //funkcja, która przekreśla gotowe zadania
 
   const renderTasks = () => {
-    const taskToHTML = task => `                                                           
+    const taskToHTML = (
+      task
+    ) => `                                                           
       <li class="
-        tasks__item ${task.done && hideDoneTasks ? "tasks__item tasks__item--hidden" : ""} js-task
+        tasks__item ${
+          task.done && hideDoneTasks ? "tasks__item tasks__item--hidden" : ""
+        } js-task
       ">
         <button class="tasks__button tasks__button--toggleDone js-toggleDone"> 
           ${task.done ? "✔" : ""}
         </button>
-        <span class="tasks__content${ task.done ? " tasks__content--done" : ""}">
+        <span class="tasks__content${task.done ? " tasks__content--done" : ""}">
           ${task.content}
         </span>
         <button class="tasks__button tasks__button--delete js-delete"> 
@@ -126,9 +126,9 @@
     `;
   };
 
-  //funkcja która dodaje buttony po ukazaniu się zadania i która je renderuje. Buttony mają albo ukrywać ukończone zadania albo pokazywać, albo oznaczać jako zrobione i nie oznaczać. 
+  //funkcja która dodaje buttony po ukazaniu się zadania i która je renderuje. Buttony mają albo ukrywać ukończone zadania albo pokazywać, albo oznaczać jako zrobione i nie oznaczać.
   //Jeśli nie ma żadnych zadań to nic nie będzie wpisane do buttonsElement. Natomiaast jeśli są to jest string.
-  //Funkcją every sprawdzamy czy wszystkie zadania są zrobione i jeśli tak dodajemy atrybut disabled a jeśli nie to go nie dodawać. 
+  //Funkcją every sprawdzamy czy wszystkie zadania są zrobione i jeśli tak dodajemy atrybut disabled a jeśli nie to go nie dodawać.
 
   const bindButtonsEvents = () => {
     const markAllDoneButton = document.querySelector(".js-markAllDone");
@@ -137,7 +137,9 @@
       markAllDoneButton.addEventListener("click", markAllTasksDone);
     }
 
-    const toggleHideDoneTasksButton = document.querySelector(".js-toggleHideDoneTasks");
+    const toggleHideDoneTasksButton = document.querySelector(
+      ".js-toggleHideDoneTasks"
+    );
 
     if (toggleHideDoneTasksButton) {
       toggleHideDoneTasksButton.addEventListener("click", toggleHideDoneTasks);
